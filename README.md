@@ -43,7 +43,7 @@ Now you are ready to compile the code!
 
 2. Run the program!
    Run the program with
-   `java -cp target/dependency:target/PaMprisController-1.0-SNAPSHOT.jar me.theredstonedevde.pawebctl.WebServer`
+   `java -cp target/dependency/*:target/PaMprisController-1.0-SNAPSHOT.jar me.theredstonedevde.pawebctl.WebServer`
 
 3. Open the webui!
    The webui runs under http://127.0.0.1:8193/ or http://<your pc's IP here>:8193/

@@ -1,0 +1,71 @@
+<html>
+    <head>
+        <meta http-equiv = "refresh" content = "5;" />
+        <style>
+            body{
+                background-color: #000b0c;
+                color: #00d2e6;
+                font-family: monospace;
+            }
+            h1{
+                text-align: center;
+                font-size: 2em;
+            }
+            img{
+                margin-left: 32.5%;
+                border-color: #00d2e6;
+                border-style: solid;
+                border-width: 2px;
+            }
+            .player-controls{
+                margin-top: 2%;
+            }
+            svg{
+                margin-right:10%;
+            }
+            .firstsvg{
+                margin-left: 35%;
+            }
+            .credits{
+                margin-top: 2%;
+                text-align: center;
+            }
+            .credits .title{
+                font-size: 1.4em;
+                font-weight: 700;
+            }
+            .credits .artist{
+                font-weight: 300;
+                font-size: 1.3em;
+            }
+            a {
+                color:#00d2e6
+            }
+        </style>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+    </head>
+    <body>
+        <h1>MPRIS-Controller</h1>
+        <img src="%artwork%" height="auto" width="35%"></img>
+        <div class="credits">
+            <a class="title">%title%</a><br>
+            <a class="artist">%artist%</a>
+        </div>
+        <div class="player-controls">
+            <a href="?prev" ><svg class="firstsvg" xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-player-skip-back-filled" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M19.496 4.136l-12 7a1 1 0 0 0 0 1.728l12 7a1 1 0 0 0 1.504 -.864v-14a1 1 0 0 0 -1.504 -.864z" stroke-width="0" fill="currentColor" />
+                <path d="M4 4a1 1 0 0 1 .993 .883l.007 .117v14a1 1 0 0 1 -1.993 .117l-.007 -.117v-14a1 1 0 0 1 1 -1z" stroke-width="0" fill="currentColor" />
+            </svg></a>
+            <a href="?play" ><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-player-play-filled" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M6 4v16a1 1 0 0 0 1.524 .852l13 -8a1 1 0 0 0 0 -1.704l-13 -8a1 1 0 0 0 -1.524 .852z" stroke-width="0" fill="currentColor" />
+            </svg></a>
+            <a href="?next" ><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-player-skip-forward-filled" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M3 5v14a1 1 0 0 0 1.504 .864l12 -7a1 1 0 0 0 0 -1.728l-12 -7a1 1 0 0 0 -1.504 .864z" stroke-width="0" fill="currentColor" />
+                <path d="M20 4a1 1 0 0 1 .993 .883l.007 .117v14a1 1 0 0 1 -1.993 .117l-.007 -.117v-14a1 1 0 0 1 1 -1z" stroke-width="0" fill="currentColor" />
+            </svg></a>
+        </div> 
+    </body>
+</html>

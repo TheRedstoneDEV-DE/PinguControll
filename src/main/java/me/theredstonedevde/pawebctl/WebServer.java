@@ -16,17 +16,18 @@ import me.theredstonedevde.mprisctl.MPRISctl;
 import me.theredstonedevde.types.Metadata;
 
 public class WebServer {
+    private static final String HOST_ADDRESS = "192.168.0.107";
+    private static final String PORT = "8193";
     private static final String[] APPROVED_IP_ADDRESSES = {
-        "192.168.0.107",
+        HOST_ADDRESS,
         "192.168.0.112",
         "127.0.0.1"
     };
-    public static void main(String[] args) {
-        int port = 8193; // Change this to your desired port
+    public static void main(String[] args) { // Change this to your desired port
         try {
             // Create a server socket to listen on the specified port
-            ServerSocket serverSocket = new ServerSocket(port);
-            System.out.println("Server is running on port " + port);
+            ServerSocket serverSocket = new ServerSocket(Integer.parseInt(PORT));
+            System.out.println("Server is running on port " + PORT);
             MPRISctl mpris = new MPRISctl();
             mpris.init();
             while (true) {
@@ -162,8 +163,8 @@ public class WebServer {
                             }
                             </script>
                             <title>RAM</title>
-                            <meta http-equiv = \"refresh\" content = \"10; url = http:\\/\\/192.168.0.107:8193\" \\/>
-                                </head><body onload="onload()"><center><h1>Remote Audio Mixer</h1></center><form action="/post" method="post">""";//TODO: change URL
+                            <meta http-equiv = \"refresh\" content = \"10; url = http://%host%:%port%\" />
+                                </head><body onload="onload()"><center><h1>Remote Audio Mixer</h1></center><form action="/post" method="post">""".replaceAll("%host%", HOST_ADDRESS).replaceAll("%port%", PORT);
                         PulseAudioSinkInfo pasi = new PulseAudioSinkInfo();
                         PulseAudioSinkInputInfo pasii = new PulseAudioSinkInputInfo();
                         List<SinkInput> sis = Stream.concat(pasi.get().stream(), pasii.get().stream()).toList();
@@ -223,7 +224,7 @@ public class WebServer {
                         // Build a simple HTML response
                         String response = "HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=utf-8\r\n\r\n";
                         response += "<html><head>";
-                        response += "<meta http-equiv = \"refresh\" content = \"0; url = http:\\/\\/192.168.0.107:8193\" \\/>"; //TODO: change URL
+                        response += "<meta http-equiv = \"refresh\" content = \"0; url = http://%host%:%port%\" />";
                         response += """
                                     <style>
                                     html{
@@ -234,7 +235,7 @@ public class WebServer {
                                     </style>
                                     """;
                         response += "</body></head>";
-                        out.print(response);
+                        out.print(response.replaceAll("%host%",HOST_ADDRESS).replaceAll("%port%",PORT));
                         out.flush();
                     } else if (request.startsWith("GET /mpris HTTP")) {
                         String response = "HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=utf-8\r\n\r\n";
@@ -284,7 +285,7 @@ public class WebServer {
                                 </style>
                                 <script>
                                 const HttpReq = new XMLHttpRequest();
-                                const url='http://192.168.0.107:8193/mpris?id';
+                                const url='http://%host%:%port%/mpris?id';
                                 var lastsum = "none"
                                 //Http.open("GET", url);
                                 setInterval(function run() {
@@ -330,10 +331,10 @@ public class WebServer {
                                         <path d="M20 4a1 1 0 0 1 .993 .883l.007 .117v14a1 1 0 0 1 -1.993 .117l-.007 -.117v-14a1 1 0 0 1 1 -1z" stroke-width="0" fill="currentColor" />
                                     </svg></a>
                                 </div>
-                                <a href="http://192.168.0.107:8193">back</a>
+                                <a href="http://%host%:%port%">back</a>
                             </body>
                         </html>
-                                """;
+                                """.replaceAll("%host%", HOST_ADDRESS).replaceAll("%port%",PORT);
                         Metadata meta = mpris.getMetadata();
                         if (meta.getArtwork()!= null){
                             if (meta.getArtwork().contains("80x80")){
@@ -360,7 +361,7 @@ public class WebServer {
                         // Build a simple HTML response
                         String response = "HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=utf-8\r\n\r\n";
                         response += "<html><head>";
-                        response += "<meta http-equiv = \"refresh\" content = \"1; url = http://192.168.0.107:8193/mpris\" />"; //TODO: change URL
+                        response += "<meta http-equiv = \"refresh\" content = \"1; url = http://%host%:%port%/mpris\" />"; //TODO: change URL
                         response += """
                                     <style>
                                     html{
@@ -371,14 +372,14 @@ public class WebServer {
                                     </style>
                                     """;
                         response += "</head>";
-                        out.print(response);
+                        out.print(response.replaceAll("%host%",HOST_ADDRESS).replaceAll("%port%",PORT));
                         out.flush();                    
                     } else if (request.startsWith("GET /mpris?play HTTP")) {
                         mpris.playpause();
                         // Build a simple HTML response
                         String response = "HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=utf-8\r\n\r\n";
                         response += "<html><head>";
-                        response += "<meta http-equiv = \"refresh\" content = \"0; url = http://192.168.0.107:8193/mpris\" />"; //TODO: change URL
+                        response += "<meta http-equiv = \"refresh\" content = \"0; url = http://%host%:%port%/mpris\" />"; //TODO: change URL
                         response += """
                                     <style>
                                     html{
@@ -389,7 +390,7 @@ public class WebServer {
                                     </style>
                                     """;
                         response += "</body></head>";
-                        out.print(response);
+                        out.print(response.replaceAll("%host%",HOST_ADDRESS).replaceAll("%port%",PORT));
                         out.flush();
                     
                     } else if (request.startsWith("GET /mpris?next HTTP")) {
@@ -397,7 +398,7 @@ public class WebServer {
                         // Build a simple HTML response
                         String response = "HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=utf-8\r\n\r\n";
                         response += "<html><head>";
-                        response += "<meta http-equiv = \"refresh\" content = \"1; url = http://192.168.0.107:8193/mpris\" />"; //TODO: change URL
+                        response += "<meta http-equiv = \"refresh\" content = \"1; url = http://%host%:%port%/mpris\" />"; //TODO: change URL
                         response += """
                                     <style>
                                     html{
@@ -408,7 +409,7 @@ public class WebServer {
                                     </style>
                                     """;
                         response += "</body></head>";
-                        out.print(response);
+                        out.print(response.replaceAll("%host%",HOST_ADDRESS).replaceAll("%port%",PORT));
                         out.flush();
                     
                     } else if (request.startsWith("GET /mpris?id HTTP")) {

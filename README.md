@@ -1,6 +1,6 @@
 
 <p align="center">
- <img width="140px" src="https://github.com/DevelLight/RhythmRift/blob/main/RhythmRift.png" align="center" alt="GitHub Readme Stats" />
+ <img width="140px" src="" align="center" alt="GitHub Readme Stats" />
  <h2 align="center">WebPaAndMprisController</h2>
  <p align="center">A simple webui to control PulseAudio (or Pipewire) and any mediaplayer with MPRIS on linux.
 This project was just created since all software I found in this direction was deprecated or not working, so I created my own.

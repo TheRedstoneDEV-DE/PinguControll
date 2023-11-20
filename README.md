@@ -68,7 +68,8 @@ Now you are ready to compile the code!
 <br />
 <hr>
 
-## Compiling
+ <h2 align="center"> Compiling </h2>
+ 
 1. Go to the repository root and execute 
    `mvn install dependency:copy-dependencies`.
    The process should complete with "BUILD SUCCSESSFUL" if not you're always welcome to create an issue!

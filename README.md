@@ -7,13 +7,13 @@ This project was just created since all software I found in this direction was d
 </p>
 </p>
   <p align="center">
-    <a href="https://github.com/TheRedstoneDEV-DE/VoiceAssistant/releases">
+    <a href="https://github.com/TheRedstoneDEV-DE/PinguControll/releases">
       <img alt="GitHub Release" src="https://img.shields.io/github/release/theredstonedev-de/voiceassistant" />
     </a>
-    <a href="https://github.com/TheRedstoneDEV-DE/VoiceAssistant/issues">
+    <a href="https://github.com/TheRedstoneDEV-DE/PinguControll/issues">
       <img alt="Issues" src="https://img.shields.io/github/issues/theredstonedev-de/voiceassistant?color=0088ff" />
     </a>
-    <a href="https://github.com/TheRedstoneDEV-DE/VoiceAssistant/pulls">
+    <a href="https://github.com/TheRedstoneDEV-DE/PinguControll/pulls">
       <img alt="GitHub pull requests" src="https://img.shields.io/github/issues-pr/theredstonedev-de/voiceassistant?color=0088ff" />
     </a>
     <br />

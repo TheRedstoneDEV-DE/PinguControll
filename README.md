@@ -60,7 +60,9 @@ public class WebServer {
 ```
 You can get these values by using the program d-feet.
   You just open the program switch to "Session Bus", filter for mpris and grab the player you want to control.
-  
+
+ <br />
+ 
  <p align="center">Now you are ready to compile the code!</p>
 
 <br />

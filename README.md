@@ -31,9 +31,7 @@ This project was just created since all software I found in this direction was d
  <p align="center">- A recent JRE / JDK version, minimum is Java 18</p>
  <p align="center">- An audio server compatible with pactl (tested on Pipewire)</p>
  <p align="center">- Maven for building the project</p>
-
-
-<br />
+ 
 <hr>
 
  <h2 align="center"> Configuring </h2>

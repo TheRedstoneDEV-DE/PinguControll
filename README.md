@@ -26,11 +26,11 @@ This project was just created since all software I found in this direction was d
   <br />
 <hr>
 
+ <h2 align="center"> Requirements </h2>
+ <p align="center">- A PC running linux</p>
+ <p align="center">- A recent JRE / JDK version, minimum is Java 18</p>
+ <p align="center">- An audio server compatible with pactl (tested on Pipewire)</p>
 
-## Requirements 
-- A PC running linux
-- A recent JRE / JDK version, minimum is Java 18
-- An audio server compatible with pactl (tested on Pipewire)
 - Maven for building the project
 
 <br />

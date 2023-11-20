@@ -33,6 +33,9 @@ This project was just created since all software I found in this direction was d
 - An audio server compatible with pactl (tested on Pipewire)
 - Maven for building the project
 
+<br />
+<hr>
+
 ## Configuring
 1. Change the allowed hosts like you need them in `src/main/java/me/theredstonedevde/pawebctl/WebServer.java` (line 18-23)
 ```java
@@ -60,6 +63,9 @@ You can get these values by using the program d-feet.
   You just open the program switch to "Session Bus", filter for mpris and grab the player you want to control.
 
 Now you are ready to compile the code!
+
+<br />
+<hr>
 
 ## Compiling
 1. Go to the repository root and execute 

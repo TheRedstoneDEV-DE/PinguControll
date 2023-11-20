@@ -36,7 +36,8 @@ This project was just created since all software I found in this direction was d
 <br />
 <hr>
 
-## Configuring
+ <h2 align="center"> Configuring </h2>
+ 
 1. Change the allowed hosts like you need them in `src/main/java/me/theredstonedevde/pawebctl/WebServer.java` (line 18-23)
 ```java
 ...

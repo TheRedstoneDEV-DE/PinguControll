@@ -631,7 +631,7 @@ public class WebServer {
                                         <path d="M20 4a1 1 0 0 1 .993 .883l.007 .117v14a1 1 0 0 1 -1.993 .117l-.007 -.117v-14a1 1 0 0 1 1 -1z" stroke-width="0" fill="currentColor" />
                                     </svg></a>
                                 </div>
-                                    <a href="http://%host%:%port%" class="ua" target="_blank">
+                                    <a href="http://%host%:%port%" class="ua">
                                         <i class="fa fa-angle-left"></i>
                                     </a>
                                 </main>

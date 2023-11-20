@@ -1,6 +1,31 @@
-# WebPaAndMprisController
-A simple webui to control PulseAudio (or Pipewire) and any mediaplayer with MPRIS on linux.
+
+<p align="center">
+ <img width="140px" src="https://github.com/DevelLight/RhythmRift/blob/main/RhythmRift.png" align="center" alt="GitHub Readme Stats" />
+ <h2 align="center">WebPaAndMprisController</h2>
+ <p align="center">A simple webui to control PulseAudio (or Pipewire) and any mediaplayer with MPRIS on linux.
 This project was just created since all software I found in this direction was deprecated or not working, so I created my own.
+</p>
+</p>
+  <p align="center">
+    <a href="https://github.com/TheRedstoneDEV-DE/VoiceAssistant/releases">
+      <img alt="GitHub Release" src="https://img.shields.io/github/release/theredstonedev-de/voiceassistant" />
+    </a>
+    <a href="https://github.com/TheRedstoneDEV-DE/VoiceAssistant/issues">
+      <img alt="Issues" src="https://img.shields.io/github/issues/theredstonedev-de/voiceassistant?color=0088ff" />
+    </a>
+    <a href="https://github.com/TheRedstoneDEV-DE/VoiceAssistant/pulls">
+      <img alt="GitHub pull requests" src="https://img.shields.io/github/issues-pr/theredstonedev-de/voiceassistant?color=0088ff" />
+    </a>
+    <br />
+  </p>
+  
+
+<p align="center">
+⚠️ This is still Work-In-Progress Software!
+</p>
+  <br />
+<hr>
+
 
 ## Requirements 
 - A PC running linux

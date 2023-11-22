@@ -21,7 +21,8 @@ This project was just created since all software I found in this direction was d
   
 
 <p align="center">
-⚠️ This is still Work-In-Progress Software!
+We rewrite it in rust.
+⚠️ This is still Work-In-Progress!
 </p>
   <br />
 <hr>

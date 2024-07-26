@@ -27,11 +27,10 @@ We rewrite it in rust. <br>Status: 07.26.2024: Its Rewritten! But we still fix b
   <br />
 <hr>
 
- ##Frontend
-- [ ] frontend
- ##Backend
-- [x] backend
-- [ ] 
+<h2>Frontend</h2> 
+	- [ ] frontend
+ <h2>Backend</h2>
+	- [x] backend
 </div>
 
  <h2 align="center"> Requirements </h2>

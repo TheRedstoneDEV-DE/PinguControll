@@ -28,11 +28,11 @@ We rewrite it in rust. <br>Status: 07.26.2024: Its Rewritten! But we still fix b
 <hr>
 
 <div align="center">
-### Todo List for the rewrite in Rust 
-
-- [ ] frontend
-- [x] backend
-- [ ] 
+ <h2 align="center"> Rewrite in Rust </h2>
+    <p align="center">Frontend</p>
+	- [ ] frontend
+    <p align="center">Backend</p>
+	- [x] backend 
 </div>
 
  <h2 align="center"> Requirements </h2>

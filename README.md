@@ -21,7 +21,7 @@ This project was just created since all software I found in this direction was d
   
 
 <p align="center">
-We rewrite it in rust.
+We rewrite it in rust. Status: 07.26.2024: Its Rewrited! But we still fix bugs and add more features.
 ⚠️ This is still Work-In-Progress!
 </p>
   <br />

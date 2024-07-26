@@ -27,11 +27,17 @@ We rewrite it in rust. <br>Status: 07.26.2024: Its Rewritten! But we still fix b
   <br />
 <hr>
 
-<h2>Frontend</h2> 
- 	- [ ] Test
+<h2>Frontend:</h2>
 
- <h2>Backend</h2>
-	-[x] backend
+- [ ] Dashboard
+- [ ] Controls
+- [x] Music
+- [ ] Mixer
+- [ ] Settings
+
+<h2>Backend:</h2>
+
+- [ ] auto update 
 
 
  <h2 align="center"> Requirements </h2>

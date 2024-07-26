@@ -28,7 +28,7 @@ We rewrite it in rust. <br>Status: 07.26.2024: Its Rewritten! But we still fix b
 <hr>
 
 <h2>Frontend</h2> 
- 	-[x] Mpris
+ 	- [ ] Test
 
  <h2>Backend</h2>
 	-[x] backend

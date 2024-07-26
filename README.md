@@ -27,17 +27,13 @@ We rewrite it in rust. <br>Status: 07.26.2024: Its Rewritten! But we still fix b
   <br />
 <hr>
 
-### Solar System Exploration, 1950s – 1960s
+<div align="center">
+### Todo List for the rewrite in Rust 
 
-- [ ] Mercury
-- [x] Venus
-- [x] Earth (Orbit/Moon)
-- [x] Mars
-- [ ] Jupiter
-- [ ] Saturn
-- [ ] Uranus
-- [ ] Neptune
-- [ ] Comet Haley
+- [ ] frontend
+- [x] backend
+- [ ] 
+</div>
 
  <h2 align="center"> Requirements </h2>
  <p align="center">- A PC running linux</p>

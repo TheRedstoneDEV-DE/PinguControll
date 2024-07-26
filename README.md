@@ -22,7 +22,7 @@ This project was just created since all software I found in this direction was d
 
 <p align="center">
 We rewrite it in rust. <br>Status: 07.26.2024: Its Rewritten! But we still fix bugs and add more features.<br>
-⚠️ This is still Work-In-Progress!
+⚠️ This is still Work-In-Progress! ⚠️
 </p>
   <br />
 <hr>

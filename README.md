@@ -27,6 +27,8 @@ We rewrite it in rust. <br>Status: 07.26.2024: Its Rewritten! But we still fix b
   <br />
 <hr>
 
+<h1 align="center"> Todolist </h1>
+
 <h2>Frontend:</h2>
 
 - [ ] Dashboard

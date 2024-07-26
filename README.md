@@ -28,7 +28,11 @@ We rewrite it in rust. <br>Status: 07.26.2024: Its Rewritten! But we still fix b
 <hr>
 
 <h2>Frontend</h2> 
-	- [ ] frontend
+        - [ ] Dashboard
+	- [ ] Mixer
+ 	- [x] Mpris
+  	- [ ] Controll
+   	- [ ] Settings (Themes, other things)
  <h2>Backend</h2>
 	- [x] backend
 </div>

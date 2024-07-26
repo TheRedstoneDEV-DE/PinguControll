@@ -32,7 +32,7 @@ We rewrite it in rust. <br>Status: 07.26.2024: Its Rewritten! But we still fix b
 
  <h2>Backend</h2>
 	-[x] backend
-</div>
+
 
  <h2 align="center"> Requirements </h2>
  <p align="center">- A PC running linux</p>

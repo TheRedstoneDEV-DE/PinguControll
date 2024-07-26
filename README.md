@@ -27,6 +27,18 @@ We rewrite it in rust. <br>Status: 07.26.2024: Its Rewritten! But we still fix b
   <br />
 <hr>
 
+### Solar System Exploration, 1950s – 1960s
+
+- [ ] Mercury
+- [x] Venus
+- [x] Earth (Orbit/Moon)
+- [x] Mars
+- [ ] Jupiter
+- [ ] Saturn
+- [ ] Uranus
+- [ ] Neptune
+- [ ] Comet Haley
+
  <h2 align="center"> Requirements </h2>
  <p align="center">- A PC running linux</p>
  <p align="center">- A recent JRE / JDK version, minimum is Java 18</p>

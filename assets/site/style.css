@@ -1,0 +1,164 @@
+body{
+    background-color: black;
+    color: cyan;
+    font-family: JetBrainsMono NF, JetBrainsMono, Hack, monospace;
+    margin: 0px;
+    /*display: flex;*/
+    /*flex-direction: column;*/
+    /*height: 100%;*/
+    overflow-x: hidden;
+}
+.slidecontainer {
+  width: 90vw;
+}
+
+.head{
+  text-align: center;
+}
+.clock_module{
+  text-align: center;
+  font-size: 1.2em;
+}
+
+.container{
+  width: 100%;
+	min-height: 300px;
+	margin: 0 auto;
+  margin-top:15px;
+	display: -webkit-flex; /* Safari */		
+	display: flex; /* Standard syntax */
+  height:79%;
+}
+
+.stats{
+  float:left;
+  flex:1;
+  padding: 5px;
+  border: 1px cyan solid;
+}
+.stats a {
+  text-align: left;
+}
+.stats span{
+  text-align: right;
+  float: right;
+}
+
+.links{
+  border: 1px cyan solid;
+  padding: 5px;
+  flex-grow: 1;
+  margin-right: 5px;
+  flex:1;
+  margin-left:10px
+}
+
+.controls{
+  border: 1px cyan solid;
+  padding: 5px;
+  flex-grow: 1;
+  margin-right: 5px;
+  flex:1;
+  margin-left:5px
+}
+.controls a button{
+  margin-left: 2.5%;
+  margin-right: 2.5%;
+  margin-top: 5px;
+  margin-bottom: 12px;
+  width: 45%;
+}
+
+.links a{
+  text-align: left;
+}
+
+.links a button{
+  margin-left: 0%;
+  margin-top: 12px;
+  width: 100%;
+}
+
+
+.slider {
+  -webkit-appearance: none;
+  width: 90vw;
+  margin-left: 5vw;
+  height: 5px;
+  background: #262626;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  background: cyan;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  background: #04AA6D;
+  cursor: pointer;
+}
+button,.submit{
+    background-color: rgba(0, 0, 0, 0.925);
+    color: #009ba3;
+    top: 50%;
+    padding: 10px;
+    border-color: #009ba3;
+    border-style: solid;
+    transition: 0.5s;
+    font-size: 1.2em;
+  }
+
+  button:hover,.submit:hover{
+    background-color: transparent;
+    color: #03e9f4;
+    top: 50%;
+    padding: 10px;
+    border-color: #03e9f4;
+    border-style: solid;
+    transition: 0.5s;
+    font-size: 1.2em;
+  }
+
+  button:active,.submit:active{
+    border-color: #c2fcff;
+    color: #c2fcff;
+    transition: 0.0s;
+    font-size: 1.2em;
+  }
+  .submit {
+    width:100%;
+    height: 50px;
+    font-size: 1.5em;
+  }
+  .submit:hover {
+    font-size: 1.5em;
+  }
+  .submit:active {
+    font-size: 1.5em;
+  }
+  .floating_submit {
+    background-color: black;
+    position: fixed;
+    width: 100vw;
+    bottom: 0;
+  }
+  .mpris-controller {
+    padding: 1vw;
+  }
+  main{
+    height: fit-content;
+  }

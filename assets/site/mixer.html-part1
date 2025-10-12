@@ -1,0 +1,195 @@
+<html>
+
+<head>
+  <link rel="stylesheet" href="style.css">
+  <script src="/jquery.min.js"></script>
+  <script>
+    let devices = [];
+    let apps = [];
+    function onload() {
+      var sliders = document.getElementsByClassName("slider");
+      var output = document.getElementById("demo");
+      document.getElementsByName("sendback")[0].value = "{}";
+      let val = {};
+      for (var i = 0; i < sliders.length; i++) {
+        if (isIDValid(sliders[i].id)) {
+          sliders[i].oninput = function () {
+            output.innerHTML = this.value + "%";
+            val[this.id] = this.value;
+            document.getElementsByName("sendback")[0].value = JSON.stringify(val);
+            var url = "http://%host%:%port%/setvol"
+            $.ajax({
+              type: "POST",
+              url: url,
+              data: $("#form0").serialize(), // serializes the form's elements.
+            });
+          }
+        } else {
+          sliders[i].parentElement.remove();
+        }
+      }
+    }
+    setTimeout(updateData, 500);
+    const HttpReq = new XMLHttpRequest();
+    const url = 'http://%host%:%port%/api?playerID';
+    var lastsum = "none"
+    //Http.open("GET", url);
+    setInterval(function run() {
+      HttpReq.open("GET", url);
+      HttpReq.send();
+    }, 1000);
+    setInterval(updateFaders, 10000);
+
+    HttpReq.onreadystatechange = (e) => {
+      if (lastsum == "none" || lastsum == "") {
+        lastsum = HttpReq.responseText;
+      }
+      var newsum = HttpReq.responseText
+      if (lastsum != newsum && newsum != '') {
+        setTimeout(updateData, 500);
+        lastsum = HttpReq.responseText;
+      }
+    }
+    function getRandomInt(max) {
+      return Math.floor(Math.random() * max);
+    }
+    function updateData() {
+      const HttpJSONReq = new XMLHttpRequest();
+      const url = 'http://%host%:%port%/mpris';
+      HttpJSONReq.responseType = "json";
+      HttpJSONReq.open("GET", url, true);
+      HttpJSONReq.send();
+      HttpJSONReq.onreadystatechange = (e) => {
+        if (HttpJSONReq.response) {
+          document.getElementById("artwork").src = HttpJSONReq.response.artwork_url;
+          document.getElementById("metadata").innerHTML = "<b>" + HttpJSONReq.response.title + "</b><br>" + HttpJSONReq.response.artist;
+        }
+      }
+    }
+    function isIDValid(id) {
+      for (const device of devices) {
+        if (id == device.id) {
+          return true;
+        }
+      }
+      for (const app of apps) {
+        if (id == app.id) {
+          return true;
+        }
+      }
+      return false;
+    }
+    function updateFaders() {
+      const HttpJSONReq = new XMLHttpRequest();
+      const url = '/api/mixer/get_faders';
+      HttpJSONReq.responseType = "json";
+      HttpJSONReq.open("GET", url, true);
+      HttpJSONReq.send();
+      HttpJSONReq.onreadystatechange = (e) => {
+        if (HttpJSONReq.response) {
+          let patchbay = document.getElementById("patchbay");
+          devices = HttpJSONReq.response.devices;
+          apps = HttpJSONReq.response.apps;
+          HttpJSONReq.response.devices.forEach(device => {
+            if (!document.getElementById(device.id)) {
+              patchbay.innerHTML += '<div name="[DEVICE] ' + device.name + '"><h3>[DEVICE] ' + device.name + '</h3><input type="range" min="0" max="150" id="' + device.id + '" class="slider"></div>';
+            }
+            setTimeout(() => {
+              document.getElementById(device.id).value = device.level;
+            }, 120);
+          });
+
+          HttpJSONReq.response.apps.forEach(device => {
+            if (!document.getElementById(device.id)) {
+              patchbay.innerHTML += '<div name="' + device.name + '"><h3>[APP] ' + device.name + '</h3><input type="range" min="0" max="150" id="' + device.id + '" class="slider"></div>';
+            }
+            setTimeout(() => {
+              document.getElementById(device.id).value = device.level;
+            }, 120);
+          });
+        }
+        setTimeout(onload, 360);
+      }
+    }
+
+    function prev() {
+      const HttpJSONReq = new XMLHttpRequest();
+      HttpJSONReq.open("GET", "http://%host%:%port%/mpris?prev");
+      HttpJSONReq.send();
+    }
+    function play() {
+      const HttpJSONReq = new XMLHttpRequest();
+      HttpJSONReq.open("GET", "http://%host%:%port%/mpris?play");
+      HttpJSONReq.send();
+    }
+    function next() {
+      const HttpJSONReq = new XMLHttpRequest();
+      HttpJSONReq.open("GET", "http://%host%:%port%/mpris?next");
+      HttpJSONReq.send();
+    }
+  </script>
+  <title>RAM</title>
+</head>
+
+<body onload="updateFaders()">
+  <!-- nav-right -->
+  <main>
+    <center>
+      <h1>Remote Audio Mixer</h1>
+    </center>
+    <form action="/setvol" id="form0" method="post" style="margin-bottom: 120px">
+      <div id="patchbay">
+      </div>
+<div class="floating_submit">
+  <h3 id="demo" style="margin: 0.5vw; padding:0; font-size: 1.2vw;">--%</h3>
+  <input type="hidden" value="" name="sendback">
+  <div
+    style="height: fit-content; display: flex; justify-content: space-between; flex-wrap: nowrap; flex-flow: row wrap; align-items: center; margin-bottom: 1.2vw; border: aqua 1px solid; padding: 0.5vw;">
+    <div style="align-items: center; flex: 1 1 0px;">
+      <img id="artwork" style="height: 6vw; margin-right:auto">
+    </div>
+    <div style="text-align: center; display: flex; align-items: center; justify-content: center; flex: 1 1 0px;">
+      <a onclick="prev()" style="margin-right:1.25vw;">
+        <svg style="width: 3vw; height: auto" class="firstsvg" xmlns="http://www.w3.org/2000/svg"
+          class="icon icon-tabler icon-tabler-player-skip-back-filled" width="24" height="24" viewBox="0 0 24 24"
+          stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <path d="M19.496 4.136l-12 7a1 1 0 0 0 0 1.728l12 7a1 1 0 0 0 1.504 -.864v-14a1 1 0 0 0 -1.504 -.864z"
+            stroke-width="0" fill="currentColor" />
+          <path d="M4 4a1 1 0 0 1 .993 .883l.007 .117v14a1 1 0 0 1 -1.993 .117l-.007 -.117v-14a1 1 0 0 1 1 -1z"
+            stroke-width="0" fill="currentColor" />
+        </svg></a>
+      <a onclick="play()" style="margin-right:1.25vw;"><svg style="width: 3vw; height: auto"
+          xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-player-play-filled" width="24"
+          height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <path d="M6 4v16a1 1 0 0 0 1.524 .852l13 -8a1 1 0 0 0 0 -1.704l-13 -8a1 1 0 0 0 -1.524 .852z" stroke-width="0"
+            fill="currentColor" />
+        </svg></a>
+      <a onclick="next()"><svg style="width: 3vw; height: auto" xmlns="http://www.w3.org/2000/svg"
+          class="icon icon-tabler icon-tabler-player-skip-forward-filled" width="24" height="24" viewBox="0 0 24 24"
+          stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <path d="M3 5v14a1 1 0 0 0 1.504 .864l12 -7a1 1 0 0 0 0 -1.728l-12 -7a1 1 0 0 0 -1.504 .864z" stroke-width="0"
+            fill="currentColor" />
+          <path d="M20 4a1 1 0 0 1 .993 .883l.007 .117v14a1 1 0 0 1 -1.993 .117l-.007 -.117v-14a1 1 0 0 1 1 -1z"
+            stroke-width="0" fill="currentColor" />
+        </svg></a>
+    </div>
+    <span id="metadata" style="font-size:12px; font-size: 1.2vw; flex: 1 1 0px;"></span>
+  </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</form>
+</main>
+</body>
+
+</html>

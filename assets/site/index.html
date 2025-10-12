@@ -1,0 +1,47 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        setInterval(updateClock, 1000)
+        function updateClock(){
+            let curr = new Date();
+            document.getElementById('clock').innerHTML=curr.getHours().toString().padStart(2, '0')+":"+curr.getMinutes().toString().padStart(2, '0')+":"+curr.getSeconds().toString().padStart(2, '0');
+        }
+    </script>
+</head>
+
+<body>
+    <div class="head">
+        <h1>Cyberdash</h1>
+    </div>
+    <div class="clock_module" id="clock">00:00:00</div>
+    <div class="container">
+        <div class="stats">
+            <a>// -- STATS -- //</a><br>
+            <a>System:</a> <span style="color:rgb(0, 185, 0);">online</span><br>
+            <a>Version:</a> <span style="color:aquamarine">1.1-beta</span><br>
+            <a>IP:</a> <span style="color:aquamarine">192.168.0.112</span><br>
+        </div>
+        <div class="links">
+            <a>// -- REFS -- //</a><br>
+            <a href="/mixer.html"><button>Mixer</button></a><br>
+            <a href="/mpris.html"><button>MPRIS</button></a><br>
+            <a href="/sysmon.html"><button>Sysmon</button></a>
+        </div>
+        <div class="controls">
+            <a>// -- CONTROLS -- //</a><br>
+            <br>
+            <a> -- CAPTUE CARD --</a><br>
+            <a href="/cc-on"><button>ON</button></a><a href="/cc-off"><button>OFF</button></a>
+            <br>
+            <a> -- REMOTE STREAM --</a><br>
+            <a href="/remote-on"><button>ON</button></a><a href="/remote-off"><button>OFF</button></a>
+            <br>
+            <a> -- AUDIO SOFTWARE -- </a><br>
+            <a href="/start-audiogear"><button style="width: 95%">START</button></a>
+        </div>
+    </div>
+</body>
+
+</html>

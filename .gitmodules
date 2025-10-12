@@ -1,0 +1,3 @@
+[submodule "pulsectl"]
+	path = pulsectl
+	url = https://github.com/TheRedstoneDEV-DE/pulsectl

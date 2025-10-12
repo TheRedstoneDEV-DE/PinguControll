@@ -1,0 +1,282 @@
+<html>
+
+<head>
+    <style>
+        body {
+            background-color: #000b0c;
+            color: #00d2e6;
+            font-family: monospace;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2em;
+        }
+
+        img {
+            box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 20px;
+            z-index: 2;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: auto;
+            height: 40he;
+        }
+
+        .player-controls {
+            margin-top: 2%;
+        }
+
+        .firstsvg {
+            margin-left: 33.5%;
+        }
+
+        .credits {
+            margin-top: 2%;
+            text-align: center;
+        }
+
+        .credits .title {
+            font-size: 1.4em;
+            font-weight: 700;
+        }
+
+        .credits .artist {
+            font-weight: 300;
+            font-size: 1.3em;
+        }
+
+        a {
+            color: #00d2e6
+        }
+
+
+
+
+        body,
+        html {
+            height: 100%;
+            padding: 0;
+            margin: 0;
+            font-family: monospace;
+        }
+
+        main {
+            z-index: 2;
+            position: relative;
+            height: 100%;
+            background-color: #000b0c;
+            -webkit-transition: transform .7s ease-in-out;
+            -moz-transition: transform .7s ease-in-out;
+            -ms-transition: transform .7s ease-in-out;
+            -o-transition: transform .7s ease-in-out;
+            transition: transform .7s ease-in-out;
+        }
+
+        .button {
+            cursor: pointer;
+            display: inline-block;
+            width: auto;
+            margin: 0 auto;
+            -webkit-transition: all .7s ease;
+            -moz-transition: all .7s ease;
+            -ms-transition: all .7s ease;
+            -o-transition: all .7s ease;
+            transition: all .7s ease;
+        }
+
+
+        .hidden-xs {
+            display: none;
+        }
+
+        .middle {
+            margin: 0 auto;
+        }
+
+        .bar {
+            -webkit-transition: all .7s ease;
+            -moz-transition: all .7s ease;
+            -ms-transition: all .7s ease;
+            -o-transition: all .7s ease;
+            transition: all .7s ease;
+        }
+
+        .nav-right.visible-xs .active .bar {
+            background-color: #FFF;
+            -webkit-transition: all .7s ease;
+            -moz-transition: all .7s ease;
+            -ms-transition: all .7s ease;
+            -o-transition: all .7s ease;
+            transition: all .7s ease;
+        }
+
+        .button.active .top {
+            -webkit-transform: translateY(15px) rotateZ(45deg);
+            -moz-transform: translateY(15px) rotateZ(45deg);
+            -ms-transform: translateY(15px) rotateZ(45deg);
+            -o-transform: translateY(15px) rotateZ(45deg);
+            transform: translateY(15px) rotateZ(45deg);
+        }
+
+        .button.active .bottom {
+            -webkit-transform: translateY(-15px) rotateZ(-45deg);
+            -moz-transform: translateY(-15px) rotateZ(-45deg);
+            -ms-transform: translateY(-15px) rotateZ(-45deg);
+            -o-transform: translateY(-15px) rotateZ(-45deg);
+            transform: translateY(-15px) rotateZ(-45deg);
+        }
+
+        .button.active .middle {
+            width: 0;
+        }
+
+        .move-to-left {
+            -webkit-transform: translateX(-400px);
+            -moz-transform: translateX(-400px);
+            -ms-transform: translateX(-400px);
+            -o-transform: translateX(-400px);
+            transform: translateX(-400px);
+        }
+
+
+        .ua {
+            font-size: 2.5em;
+            position: absolute;
+            bottom: 20px;
+            margin-left: 20px;
+            color: #000b1c;
+        }
+
+        .fa {
+            font-size: 4.4em;
+            color: #00d2e6;
+            -webkit-transition: all 1s ease;
+            -moz-transition: all 1s ease;
+            -ms-transition: all 1s ease;
+            -o-transition: all 1s ease;
+            transition: all 1s ease;
+        }
+
+        .glow-container {
+            position: relative;
+        }
+
+        .glow-container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('%artwork%');
+            filter: blur(130px);
+            opacity: 0.7;
+        }
+    </style>
+    <script>
+        const HttpReq = new XMLHttpRequest();
+        const url = 'http://%host%:%port%/api?playerID';
+        var lastsum = "none"
+        //Http.open("GET", url);
+        setInterval(function run() {
+            HttpReq.open("GET", url);
+            HttpReq.send();
+        }, 1000);
+
+        HttpReq.onreadystatechange = (e) => {
+            if (lastsum == "none" || lastsum == "") {
+                lastsum = HttpReq.responseText;
+            }
+            var newsum = HttpReq.responseText
+            if (lastsum != newsum && newsum != '') {
+                location.reload();
+                console.log("rel!")
+            }
+            //console.log(newsum);
+            //console.log(lastsum);
+        }
+    </script>
+    <link rel="stylesheet" href="/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+
+<body>
+
+    <div class="nav-right visible-xs">
+        <div class="button" id="btn">
+            <div class="bar top"></div>
+            <div class="bar middle"></div>
+            <div class="bar bottom"></div>
+        </div>
+    </div>
+    <!-- nav-right -->
+    <main>
+        <nav>
+            <div class="nav-right hidden-xs">
+                <div class="button" id="btn">
+                    <div class="bar top"></div>
+                    <div class="bar middle"></div>
+                    <div class="bar bottom"></div>
+                </div>
+            </div>
+            <!-- nav-right -->
+        </nav>
+
+        <h1>MPRIS-Controller</h1>
+        <div class="glow-container">
+            <img src="%artwork%" />
+        </div>
+        <div class="credits">
+            <a class="title">%title%</a><br>
+            <a class="artist">%artist%</a>
+        </div>
+        <div class="player-controls">
+            <a href="?prev" style="margin-right:12.5%;"><svg style="width: 3%; height: auto" class="firstsvg"
+                    xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-player-skip-back-filled"
+                    width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path
+                        d="M19.496 4.136l-12 7a1 1 0 0 0 0 1.728l12 7a1 1 0 0 0 1.504 -.864v-14a1 1 0 0 0 -1.504 -.864z"
+                        stroke-width="0" fill="currentColor" />
+                    <path
+                        d="M4 4a1 1 0 0 1 .993 .883l.007 .117v14a1 1 0 0 1 -1.993 .117l-.007 -.117v-14a1 1 0 0 1 1 -1z"
+                        stroke-width="0" fill="currentColor" />
+                </svg></a>
+            <a href="?play" style="margin-right:12.5%;"><svg style="width: 3%; height: auto"
+                    xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-player-play-filled"
+                    width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M6 4v16a1 1 0 0 0 1.524 .852l13 -8a1 1 0 0 0 0 -1.704l-13 -8a1 1 0 0 0 -1.524 .852z"
+                        stroke-width="0" fill="currentColor" />
+                </svg></a>
+            <a href="?next" style="margin-right:12.5%;"><svg style="width: 3%; height: auto"
+                    xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-player-skip-forward-filled"
+                    width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M3 5v14a1 1 0 0 0 1.504 .864l12 -7a1 1 0 0 0 0 -1.728l-12 -7a1 1 0 0 0 -1.504 .864z"
+                        stroke-width="0" fill="currentColor" />
+                    <path
+                        d="M20 4a1 1 0 0 1 .993 .883l.007 .117v14a1 1 0 0 1 -1.993 .117l-.007 -.117v-14a1 1 0 0 1 1 -1z"
+                        stroke-width="0" fill="currentColor" />
+                </svg></a>
+        </div>
+        <a href="http://%host%:%port%/mixer" class="ua">
+            <i class="fa fa-angle-left"></i>
+        </a>
+    </main>
+
+    <div class="sidebar">
+        <ul class="sidebar-list">
+            <li class="sidebar-item"><a href="#" class="sidebar-anchor">Mpris </a></li>
+            <li class="sidebar-item"><a href="http://192.168.0.107:8193/mixer" class="sidebar-anchor">Mixer</a></li>
+            <li class="sidebar-item"><a href="http://192.168.0.107:8193/" class="sidebar-anchor">Dash</a></li>
+        </ul>
+    </div>
+</body>
+
+</html>

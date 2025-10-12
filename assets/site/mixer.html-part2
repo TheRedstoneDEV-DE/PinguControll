@@ -1,0 +1,54 @@
+</div>
+<div class="floating_submit">
+  <h3 id="demo" style="margin: 0.5vw; padding:0; font-size: 1.2vw;">--%</h3>
+  <input type="hidden" value="" name="sendback">
+  <div
+    style="height: fit-content; display: flex; justify-content: space-between; flex-wrap: nowrap; flex-flow: row wrap; align-items: center; margin-bottom: 1.2vw; border: aqua 1px solid; padding: 0.5vw;">
+    <div style="align-items: center; flex: 1 1 0px;">
+      <img id="artwork" style="height: 6vw; margin-right:auto">
+    </div>
+    <div style="text-align: center; display: flex; align-items: center; justify-content: center; flex: 1 1 0px;">
+      <a onclick="prev()" style="margin-right:1.25vw;">
+        <svg style="width: 3vw; height: auto" class="firstsvg" xmlns="http://www.w3.org/2000/svg"
+          class="icon icon-tabler icon-tabler-player-skip-back-filled" width="24" height="24" viewBox="0 0 24 24"
+          stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <path d="M19.496 4.136l-12 7a1 1 0 0 0 0 1.728l12 7a1 1 0 0 0 1.504 -.864v-14a1 1 0 0 0 -1.504 -.864z"
+            stroke-width="0" fill="currentColor" />
+          <path d="M4 4a1 1 0 0 1 .993 .883l.007 .117v14a1 1 0 0 1 -1.993 .117l-.007 -.117v-14a1 1 0 0 1 1 -1z"
+            stroke-width="0" fill="currentColor" />
+        </svg></a>
+      <a onclick="play()" style="margin-right:1.25vw;"><svg style="width: 3vw; height: auto"
+          xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-player-play-filled" width="24"
+          height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <path d="M6 4v16a1 1 0 0 0 1.524 .852l13 -8a1 1 0 0 0 0 -1.704l-13 -8a1 1 0 0 0 -1.524 .852z" stroke-width="0"
+            fill="currentColor" />
+        </svg></a>
+      <a onclick="next()"><svg style="width: 3vw; height: auto" xmlns="http://www.w3.org/2000/svg"
+          class="icon icon-tabler icon-tabler-player-skip-forward-filled" width="24" height="24" viewBox="0 0 24 24"
+          stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <path d="M3 5v14a1 1 0 0 0 1.504 .864l12 -7a1 1 0 0 0 0 -1.728l-12 -7a1 1 0 0 0 -1.504 .864z" stroke-width="0"
+            fill="currentColor" />
+          <path d="M20 4a1 1 0 0 1 .993 .883l.007 .117v14a1 1 0 0 1 -1.993 .117l-.007 -.117v-14a1 1 0 0 1 1 -1z"
+            stroke-width="0" fill="currentColor" />
+        </svg></a>
+    </div>
+    <span id="metadata" style="font-size:12px; font-size: 1.2vw; flex: 1 1 0px;"></span>
+  </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</form>
+</main>
+</body>
+
+</html>

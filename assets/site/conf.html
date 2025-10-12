@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <link rel="stylesheet" href="style.css">
+    <script src="/jquery.min.js"></script>
+    <meta charset="utf-8">
+    <title></title>
+    <script>
+      function addhost(){
+        document.getElementById("allowed-hosts").innerHTML+='<div> <span class="alhost">'+ document.getElementById("alhost-input").value + '</span><button style="margin-left:2vw" onclick="this.parentElement.remove()">remove</button></div>';
+      }
+      function composeConfig(){
+        let allowed_list = [];
+        for ( let entry of document.getElementsByClassName("alhost") ) {
+          allowed_list.push(entry.innerText);
+        }
+        let config = {
+          "ftsetup": false,
+          "host": document.getElementById("host").value,
+          "port": document.getElementById("port").value,
+          "allowed_ips": allowed_list,
+          "theme": "std",
+          "button_1": {
+            "text": document.getElementById("btn_1_text").value,
+            "executable": document.getElementById("btn_1_cmd").value,
+            "args":  document.getElementById("btn_1_args").value.split(" ")
+          },
+          "button_2": {
+            "text": document.getElementById("btn_2_text").value,
+            "executable": document.getElementById("btn_2_cmd").value,
+            "args":  document.getElementById("btn_2_args").value.split(" ")
+          },
+          "button_3": {
+            "text": document.getElementById("btn_3_text").value,
+            "executable": document.getElementById("btn_3_cmd").value,
+            "args":  document.getElementById("btn_3_args").value.split(" ")
+          },
+          "button_4": {
+            "text": document.getElementById("btn_4_text").value,
+            "executable": document.getElementById("btn_4_cmd").value,
+            "args":  document.getElementById("btn_4_args").value.split(" ")
+          },
+          "button_5": {
+            "text": document.getElementById("btn_5_text").value,
+            "executable": document.getElementById("btn_5_cmd").value,
+            "args":  document.getElementById("btn_5_args").value.split(" ")
+          },
+          "button_6": {
+            "text": document.getElementById("btn_6_text").value,
+            "executable": document.getElementById("btn_6_cmd").value,
+            "args":  document.getElementById("btn_6_args").value.split(" ")
+          }
+        };
+        return config;
+      }
+      function submit(){
+      document.getElementsByName("sendback")[0].value=JSON.stringify(composeConfig());
+      let url="http://%host%:%port%/write-config"
+      $.ajax({
+                type: "POST",
+                url: url,
+                data: $("#form0").serialize(), // serializes the form's elements.
+      });
+    }
+    </script>
+  </head>
+  <body>
+    <div class="head">
+      <h1>First-Time Setup</h1>
+      Host: <input type="text" id="host" placeholder="192.168.0.100"/>:<input type="text" id="port" placeholder="8193"/><br>
+      Allowed hosts:<br>
+      <div id="allowed-hosts">
+      </div>
+      <input type="text" id="alhost-input" style="margin-right: 2vw" placeholder="192.168.0.190"/><a onclick="addhost()"> <button> add </button></a>
+      <h2>Button Config</h2>
+      <h3>button_1</h3>
+      Text: <input type="text" id="btn_1_text"/>
+      Executabe: <input type="text" id="btn_1_cmd"/>
+      Args: <input type="text" id="btn_1_args"/>
+      <h3>button_2</h3>
+      Text: <input type="text" id="btn_2_text"/>
+      Executabe: <input type="text" id="btn_2_cmd"/>
+      Args: <input type="text" id="btn_2_args"/>
+      <h3>button_3</h3>
+      Text: <input type="text" id="btn_3_text"/>
+      Executabe: <input type="text" id="btn_3_cmd"/>
+      Args: <input type="text" id="btn_3_args"/>
+      <h3>button_4</h3>
+      Text: <input type="text" id="btn_4_text"/>
+      Executabe: <input type="text" id="btn_4_cmd"/>
+      Args: <input type="text" id="btn_4_args"/>
+      <h3>button_5</h3>
+      Text: <input type="text" id="btn_5_text"/>
+      Executabe: <input type="text" id="btn_5_cmd"/>
+      Args: <input type="text" id="btn_5_args"/>
+      <h3>button_6</h3>
+      Text: <input type="text" id="btn_6_text"/>
+      Executabe: <input type="text" id="btn_6_cmd"/>
+      Args: <input type="text" id="btn_6_args"/>
+       <form action="/" id="form0" method="post" style="margin-bottom: 120px">
+          <input type="hidden" value="" name="sendback">
+      </form>
+      </body>
+</html>

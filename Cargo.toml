@@ -1,0 +1,15 @@
+[package]
+name = "pa_mixer_rewrite"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+mpris = "2.0.1"
+rocket = { version = "0.5.1", features = [ "json" ] }
+dirs = "5.0.1"
+serde = {version = "1.0.221", features = [ "derive" ]}
+libpulse-binding = "2.30.1"
+rust-embed = "8.7.2"
+
+[dependencies.rust-pulsectl-fork]
+path = "pulsectl"

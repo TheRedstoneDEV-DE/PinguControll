@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="style.css">
+        <title>Sysmon</title>
+        <script>
+            setInterval(update, 5000)
+            setInterval(updateClock, 1000)
+            function updateClock(){
+                let curr = new Date();
+                document.getElementById('clock').innerHTML=curr.getHours().toString().padStart(2, '0')+":"+curr.getMinutes().toString().padStart(2, '0')+":"+curr.getSeconds().toString().padStart(2, '0');
+            }
+            function httpGet(theUrl)
+            {
+                var xmlHttp = new XMLHttpRequest();
+                xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+                xmlHttp.send( null );
+                return xmlHttp.responseText;
+            }
+            function update(){
+                let urls = ["http://192.168.0.108:8012/load.rsts","http://192.168.0.126:8012/load.rsts","http://192.168.0.107:8012/load.rsts"];
+                for(let i=0;i<3;i++){
+                    try{
+                        let x = JSON.parse(httpGet(urls[i]));
+                        document.getElementById("status"+(i+1)).innerHTML="online";
+                        document.getElementById("status"+(i+1)).style="color:rgb(0, 185, 0);";
+                        document.getElementById("hostname"+(i+1)).innerHTML=x.hostname;
+                        document.getElementById("kernel"+(i+1)).innerHTML=x.kernel;
+                        if (i==1){
+                            document.getElementById("kernel"+(i+1)).innerHTML=x.kernel.replace(".x86_64","");
+                        }
+                        document.getElementById("version"+(i+1)).innerHTML=x.version;
+                        document.getElementById("cpu-load"+(i+1)).innerHTML=x.cpu_usage+" %";
+                        document.getElementById("cpu-temp"+(i+1)).innerHTML=x.cpu_temp+"°C";
+                        document.getElementById("memory"+(i+1)).innerHTML=x.mem_used+"/"+x.mem_total+" MB";
+                        document.getElementById("cores"+(i+1)).innerHTML=x.cores;
+                    }catch(err){
+                        document.getElementById("status"+(i+1)).innerHTML="offline";
+                        document.getElementById("status"+(i+1)).style="color:rgb(185, 0, 0);";
+                        document.getElementById("hostname"+(i+1)).innerHTML=".-.";
+                        document.getElementById("kernel"+(i+1)).innerHTML=".-.";
+                        document.getElementById("version"+(i+1)).innerHTML=".-.";
+                        document.getElementById("cpu-load"+(i+1)).innerHTML=".-.";
+                        document.getElementById("cpu-temp"+(i+1)).innerHTML=".-.";
+                        document.getElementById("memory"+(i+1)).innerHTML=".-.";
+                        document.getElementById("cores"+(i+1)).innerHTML=".-.";
+                    }
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <div class="head">
+            <h1>SYSMON.CENTRAL</h1>
+        </div>
+        <div class="clock_module" id="clock">00:00:00</div>
+        <div class="container">
+            <div class="stats">
+                <a>// -- SERVER 01 -- //</a><br>
+                <a>Status:</a> <span id="status1" style="color:rgb(185, 0, 0);">offline</span><br>
+                <a>System:</a><span id="hostname1" style="color:aquamarine">.-.</span><br>
+                <a>Kernel:</a><span id="kernel1" style="color:aquamarine">.-.</span><br>
+                <a>Version:</a><span id="version1" style="color:aquamarine">.-.</span><br>
+                <a>Cores:</a><span id="cores1" style="color:aquamarine">.-.</span><br>
+                <a>CPU-Load:</a><span id="cpu-load1" style="color:aquamarine">.-.</span><br>
+                <a>CPU-Temp:</a><span id="cpu-temp1" style="color:aquamarine">.-.</span><br>
+                <a>Memory:</a><span id="memory1" style="color:aquamarine">.-.</span><br>
+                <a>IP:</a> <span style="color:aquamarine">192.168.0.108</span><br>
+            </div>
+            <div class="stats">
+                <a>// -- SERVER 02 -- //</a><br>
+                <a>Status:</a> <span id="status2" style="color:rgb(185, 0, 0);">offline</span><br>
+                <a>System:</a><span id="hostname2" style="color:aquamarine">.-.</span><br>
+                <a>Kernel:</a><span id="kernel2" style="color:aquamarine">.-.</span><br>
+                <a>Version:</a><span id="version2" style="color:aquamarine">.-.</span><br>
+                <a>Cores:</a><span id="cores2" style="color:aquamarine">.-.</span><br>
+                <a>CPU-Load:</a><span id="cpu-load2" style="color:aquamarine">.-.</span><br>
+                <a>CPU-Temp:</a><span id="cpu-temp2" style="color:aquamarine">.-.</span><br>
+                <a>Memory:</a><span id="memory2" style="color:aquamarine">.-.</span><br>
+                <a>IP:</a> <span style="color:aquamarine">192.168.0.126</span><br>
+            </div>
+            <div class="stats">
+                <a>// -- WORKSTATION -- //</a><br>
+                <a>Status:</a> <span id="status3" style="color:rgb(185, 0, 0);">offline</span><br>
+                <a>System:</a><span id="hostname3" style="color:aquamarine">.-.</span><br>
+                <a>Kernel:</a><span id="kernel3" style="color:aquamarine">.-.</span><br>
+                <a>Version:</a><span id="version3" style="color:aquamarine">.-.</span><br>
+                <a>Cores:</a><span id="cores3" style="color:aquamarine">.-.</span><br>
+                <a>CPU-Load:</a><span id="cpu-load3" style="color:aquamarine">.-.</span><br>
+                <a>CPU-Temp:</a><span id="cpu-temp3" style="color:aquamarine">.-.</span><br>
+                <a>Memory:</a><span id="memory3" style="color:aquamarine">.-.</span><br>
+                <a>IP:</a> <span style="color:aquamarine">192.168.0.107</span><br>
+            </div>
+        </div>
+    </body>
+</html>

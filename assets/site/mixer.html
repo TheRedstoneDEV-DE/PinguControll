@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="style.css">
+  <script src="/jquery.min.js"></script>
+  <script>
+    let devices = [];
+    let apps = [];
+    let players = [];
+    let selected_player = "ostui";
+
+    function onload() {
+      var sliders = document.getElementsByClassName("slider");
+      var output = document.getElementById("demo");
+      document.getElementsByName("sendback")[0].value = "{}";
+      for (var i = 0; i < sliders.length; i++) {
+        if (isIDValid(sliders[i].id)) {
+          sliders[i].oninput = function () {
+            output.innerHTML = this.value + "%";
+            var url = "/api/mixer/control"
+            $.ajax({
+              type: "PUT",
+              url: url,
+              contentType: 'application/json',
+              data: JSON.stringify({id: +this.id, name: "", value: +this.value}),
+            });
+          }
+        } else {
+          sliders[i].parentElement.remove();
+        }
+      }
+    }
+    setInterval(updateData, 1000);
+    setInterval(updateFaders, 10000);
+
+    function getRandomInt(max) {
+      return Math.floor(Math.random() * max);
+    }
+
+    function updateData() {
+      const HttpJSONReq = new XMLHttpRequest();
+      const url = '/api/mpris/get_players';
+      HttpJSONReq.responseType = "json";
+      HttpJSONReq.open("GET", url, true);
+      HttpJSONReq.send();
+      HttpJSONReq.onreadystatechange = (e) => {
+        if (HttpJSONReq.response) {
+          players = HttpJSONReq.response;
+          let player = players.find(obj => obj.name === selected_player);
+          if (!player && players.length > 0) {
+            selected_player = players[0].name;
+            player = players[0];
+          }
+          //document.getElementById("artwork").src = HttpJSONReq.response[index].current_song.artwork_url;
+          document.getElementById("metadata").innerHTML = "<b>" + player.current_song.title + "</b><br>" + player.current_song.artist;
+        }
+      }
+    }
+
+    function isIDValid(id) {
+      for (const device of devices) {
+        if (id == device.id) {
+          return true;
+        }
+      }
+      for (const app of apps) {
+        if (id == app.id) {
+          return true;
+        }
+      }
+      return false;
+    }
+
+    function updateFaders() {
+      const HttpJSONReq = new XMLHttpRequest();
+      const url = '/api/mixer/get_faders';
+      HttpJSONReq.responseType = "json";
+      HttpJSONReq.open("GET", url, true);
+      HttpJSONReq.send();
+      HttpJSONReq.onreadystatechange = (e) => {
+        if (HttpJSONReq.response) {
+          let patchbay = document.getElementById("patchbay");
+          devices = HttpJSONReq.response.devices;
+          apps = HttpJSONReq.response.apps;
+          HttpJSONReq.response.devices.forEach(device => {
+            if (!document.getElementById(device.id)) {
+              patchbay.innerHTML += '<div name="[DEVICE] ' + device.name + '"><h3>[DEVICE] ' + device.name + '</h3><input type="range" min="0" max="150" id="' + device.id + '" class="slider"></div>';
+            }
+            setTimeout(() => {
+              document.getElementById(device.id).value = device.value;
+            }, 120);
+          });
+
+          HttpJSONReq.response.apps.forEach(device => {
+            if (!document.getElementById(device.id)) {
+              patchbay.innerHTML += '<div name="' + device.name + '"><h3>[APP] ' + device.name + '</h3><input type="range" min="0" max="150" id="' + device.id + '" class="slider"></div>';
+            }
+            setTimeout(() => {
+              document.getElementById(device.id).value = device.value;
+            }, 120);
+          });
+        }
+        setTimeout(onload, 360);
+      }
+    }
+
+    function prev() {
+      const HttpJSONReq = new XMLHttpRequest();
+      let player = players.find(obj => obj.name === selected_player);
+
+      if (!player) {
+        return
+      }
+      HttpJSONReq.open("GET", "/api/mpris/control?action=prev&player="+player.name);
+      HttpJSONReq.send();
+    }
+
+    function play() {
+      let player = players.find(obj => obj.name === selected_player);
+
+      if (!player) {
+        return
+      }
+
+      const HttpJSONReq = new XMLHttpRequest();
+      HttpJSONReq.open("GET", "/api/mpris/control?action=play&player="+player.name);
+      HttpJSONReq.send();
+    } 
+
+    function next() {
+      let player = players.find(obj => obj.name === selected_player);
+
+      if (!player) {
+        return
+      }
+
+      const HttpJSONReq = new XMLHttpRequest();
+      HttpJSONReq.open("GET", "/api/mpris/control?action=next&player="+player.name);
+      HttpJSONReq.send();
+    }
+ </script>
+  <title>RAM</title>
+</head>
+
+<body onload="updateFaders()">
+  <!-- nav-right -->
+  <main>
+    <center>
+      <h1>Remote Audio Mixer</h1>
+    </center>
+    <form action="/setvol" id="form0" method="post" style="margin-bottom: 120px">
+      <div id="patchbay">
+      </div>
+<div class="floating_submit">
+  <h3 id="demo" style="margin: 0.5vw; padding:0; font-size: 1.2vw;">--%</h3>
+  <input type="hidden" value="" name="sendback">
+  <div
+    style="height: fit-content; display: flex; justify-content: space-between; flex-wrap: nowrap; flex-flow: row wrap; align-items: center; margin-bottom: 1.2vw; border: aqua 1px solid; padding: 0.5vw;">
+    <div style="align-items: center; flex: 1 1 0px;">
+      <img id="artwork" style="height: 6vw; margin-right:auto">
+    </div>
+    <div style="text-align: center; display: flex; align-items: center; justify-content: center; flex: 1 1 0px;">
+      <a onclick="prev()" style="margin-right:1.25vw;">
+        <svg style="width: 3vw; height: auto" class="firstsvg" xmlns="http://www.w3.org/2000/svg"
+          class="icon icon-tabler icon-tabler-player-skip-back-filled" width="24" height="24" viewBox="0 0 24 24"
+          stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <path d="M19.496 4.136l-12 7a1 1 0 0 0 0 1.728l12 7a1 1 0 0 0 1.504 -.864v-14a1 1 0 0 0 -1.504 -.864z"
+            stroke-width="0" fill="currentColor" />
+          <path d="M4 4a1 1 0 0 1 .993 .883l.007 .117v14a1 1 0 0 1 -1.993 .117l-.007 -.117v-14a1 1 0 0 1 1 -1z"
+            stroke-width="0" fill="currentColor" />
+        </svg></a>
+      <a onclick="play()" style="margin-right:1.25vw;"><svg style="width: 3vw; height: auto"
+          xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-player-play-filled" width="24"
+          height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <path d="M6 4v16a1 1 0 0 0 1.524 .852l13 -8a1 1 0 0 0 0 -1.704l-13 -8a1 1 0 0 0 -1.524 .852z" stroke-width="0"
+            fill="currentColor" />
+        </svg></a>
+      <a onclick="next()"><svg style="width: 3vw; height: auto" xmlns="http://www.w3.org/2000/svg"
+          class="icon icon-tabler icon-tabler-player-skip-forward-filled" width="24" height="24" viewBox="0 0 24 24"
+          stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <path d="M3 5v14a1 1 0 0 0 1.504 .864l12 -7a1 1 0 0 0 0 -1.728l-12 -7a1 1 0 0 0 -1.504 .864z" stroke-width="0"
+            fill="currentColor" />
+          <path d="M20 4a1 1 0 0 1 .993 .883l.007 .117v14a1 1 0 0 1 -1.993 .117l-.007 -.117v-14a1 1 0 0 1 1 -1z"
+            stroke-width="0" fill="currentColor" />
+        </svg></a>
+    </div>
+    <span id="metadata" style="font-size:12px; font-size: 1.2vw; flex: 1 1 0px;"></span>
+  </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</form>
+</main>
+</body>
+
+</html>
